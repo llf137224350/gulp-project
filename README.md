@@ -1,5 +1,6 @@
 # gulp-project
 通过gulp构建纯html、css、js工程，并对测试版本和发行版本进行优化处理控制，开发过程中环境依赖有nodejs、npm等
+
 # 目录结构
 * > src ----根目录
   * > controller ----每个页面对应的js类
@@ -34,3 +35,5 @@
 * > 终端进入工程目录，执行npm install
 * > 终端进入工程目录，输入:gulp default true/false，或者简写为:gulp true/false
 * > webstorm中的使用方式，将gulp添加到快速运行，然后修改Gulpfile为:xxxx/xxxx/gulpfile.js文件，Tasks:default,Arguments:--a false/true,Node interpreter:xxxx/xxxx/xxxx/node.exe,Gulp package为工程目录下的/node_modules/gulp
+
+注:package.json文件devDependencies中的"gulp-rev": "^7.1.2","gulp-rev-collector": "^1.0.5",本用于更新代码后根据内容算出md5值添加到文件末尾生成新的文件名，解决缓存的原因导致客户端不能及时更新的问题，后弃用。可根据自己需求了解相关知识使用
