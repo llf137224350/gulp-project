@@ -33,6 +33,7 @@
 # 使用方式
 * > 确保安装并配置好了nodejs
 * > 终端进入工程目录，执行npm install
+* > 建立对应的文件夹
 * > 终端进入工程目录，输入:gulp default true/false，或者简写为:gulp true/false
 * > webstorm中的使用方式，将gulp添加到快速运行，然后修改Gulpfile为:xxxx/xxxx/gulpfile.js文件，Tasks:default,Arguments:--a false/true,Node interpreter:xxxx/xxxx/xxxx/node.exe,Gulp package为工程目录下的/node_modules/gulp
 
