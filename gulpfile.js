@@ -44,14 +44,14 @@ gulp.task('style', function () {
 });
 
 // 1.1. 控件中的css压缩
-gulp.task('weigetStyle', function () {
+gulp.task('widgetStyle', function () {
     // 这里是在执行style任务时自动执行的
-    return gulp.src(['src/weiget/*/*.css', '!src/weiget/*/_*.css'])
+    return gulp.src(['src/widget/*/*.css', '!src/widget/*/_*.css'])
         .pipe(gulpif(!isDebug, base64({
             maxImageSize: 30720//30k
         })))
         .pipe(gulpif(!isDebug, cleanCSS()))
-        .pipe(gulp.dest('dist/weiget'))
+        .pipe(gulp.dest('dist/widget'))
         .pipe(browserSync.reload({
             stream: true
         }));
@@ -111,10 +111,10 @@ gulp.task('utils', function () {
 });
 
 // 2. 3 控件类JS 压缩混淆
-gulp.task('weigetJS', function () {
-    return gulp.src('src/weiget/*/*.js')
+gulp.task('widgetJS', function () {
+    return gulp.src('src/widget/*/*.js')
         .pipe(gulpif(!isDebug, uglify()))
-        .pipe(gulp.dest('dist/weiget'))
+        .pipe(gulp.dest('dist/widget'))
         .pipe(browserSync.reload({
             stream: true
         }));
@@ -160,12 +160,12 @@ gulp.task('mp3', function () {
 
 var rename = require('gulp-rename');
 // 3. 2  控件图片复制
-gulp.task('weightImage', function () {
-    return gulp.src('src/weiget/*/images/*.*')
-        .pipe(changed('dist/weiget'))
+gulp.task('widgetImage', function () {
+    return gulp.src('src/widget/*/images/*.*')
+        .pipe(changed('dist/widget'))
         .pipe(gulpif(!isDebug, rename({dirname: 'images'})))//非调试模式下 才重命名
         .pipe(gulpif(!isDebug, imagemin()))
-        .pipe(gulpif(isDebug, gulp.dest('dist/weiget')))
+        .pipe(gulpif(isDebug, gulp.dest('dist/widget')))
         .pipe(gulpif(!isDebug, gulp.dest('dist/view/')))
         .pipe(browserSync.reload({
             stream: true
@@ -212,7 +212,7 @@ gulp.task('clean', function () {
 });
 //执行完成之后删除无用文件夹 与gulp-inline-source 配合使用
 gulp.task('del', function () {
-    return del(['dist/controller', 'dist/holder', 'dist/utils', 'dist/weiget']);
+    return del(['dist/controller', 'dist/holder', 'dist/utils', 'dist/widget']);
 });
 
 //浏览器同步刷新
@@ -230,7 +230,7 @@ gulp.task('serve', function () {
     //监视css改变
     gulp.watch('src/styles/*.css', ['style']);
     // 监视控件css改变后 执行
-    gulp.watch('src/weiget/*/*.css', ['weigetStyle']);
+    gulp.watch('src/widget/*/*.css', ['widgetStyle']);
     //监听holder中的css 干煸
     gulp.watch('src/holder/*.css', ['holderStyles']);
     //监视控制器改变
@@ -242,7 +242,7 @@ gulp.task('serve', function () {
     //监视工具累改变
     gulp.watch('src/utils/*.js', ['utils']);
     //监视控件js改变
-    gulp.watch('src/weiget/*/*.js', ['weigetJS']);
+    gulp.watch('src/widget/*/*.js', ['widgetJS']);
     //复制第三方js
     gulp.watch('src/lib/*/*.js', ['lib']);
     //监视图片文件改变
@@ -252,13 +252,13 @@ gulp.task('serve', function () {
     //音频资源文件
     gulp.watch('src/mp3/*.*', ['mp3']);
     //控件依赖的图片改变
-    gulp.watch('src/weiget/*/images/*.*', ['weightImage']);
+    gulp.watch('src/widget/*/images/*.*', ['widgetImage']);
     //监视视图改变
     gulp.watch('src/view/*.html', ['html']);
 });
 
 
-gulp.task('build_other', gulpSequence(['image', 'imageFaces', 'weightImage', "mp3"], ['style', "holderStyles", 'weigetStyle'], ['lib', 'js', "holder", "http", 'utils', 'weigetJS']));
+gulp.task('build_other', gulpSequence(['image', 'imageFaces', 'widgetImage', "mp3"], ['style', "holderStyles", 'widgetStyle'], ['lib', 'js', "holder", "http", 'utils', 'widgetJS']));
 
 //清理 编译 运行
 gulp.task('build', gulpSequence("clean", ["build_other"], "html"));
